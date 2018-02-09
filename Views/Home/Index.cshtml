@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Http
+@{
+    ViewBag.page = "index";
+}
+
+<div class="container">
+    <h3 class="display-3">Welcome to the Demo Web Application:</h3>
+    <p> @ViewBag.message </p>
+    <div>
+        @if (string.IsNullOrEmpty(Context.Session.GetString("user"))) 
+        {
+            <p>
+                To access our valuable content you need to 
+                <a asp-action="Login"><button><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in</button></a>
+            </p>
+        }
+        else
+        { 
+            <p>
+                You can proceed to our valuable content <a asp-action="Content"><button>content</button></a>
+            </p>
+        }
+    </div>
+</div>

@@ -1,0 +1,75 @@
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>CSCI 680 - Web Application Frameworks</title>
+</head>
+<body>
+<div>
+    <div class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <strong class="navbar-brand default" style="color: white !important;">ASP.Net Core Demo</strong>
+            </div>
+            <div class="navbar-collapse nav-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="@((ViewBag.page == "index") ? "active" : "")">
+                        <a asp-action="Index">Home</a>
+                    </li>
+                    <li class="@((ViewBag.page == "content") ? "active" : "")">
+                        <a asp-action="Content">Content</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (string.IsNullOrEmpty(Context.Session.GetString("user")))
+                    {
+                        <li>
+                            <a asp-action="Login">
+                                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <p class="navbar-text">@Context.Session.GetString("user")</p>
+                        </li>
+                        if (Context.Session.GetString("user") == "root")
+                        {
+                            <li>
+                                <a asp-action="Manage">
+                                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Manage Users&nbsp;
+                                </a>
+                            </li>
+                        }
+                        <li>
+                            <a asp-action="Logout">
+                                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+@RenderBody()
+<div>
+    <div class="container text-center">
+        <hr/>
+        <a href="//docs.microsoft.com/en-us/aspnet/core/" target="_blank">Developed with ASP.Net Core 2.0 MVC</a> and <a href="//www.mongodb.com" target="_blank">MongoDB</a> &nbsp; &copy; 2018 CSCI 680 - Dr. Raimund K. Ege - NIU - CS
+    </div>
+</div>
+
+</body>
+</html>
